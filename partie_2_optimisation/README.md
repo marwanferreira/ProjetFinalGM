@@ -39,7 +39,7 @@ Trois variantes d’optimisation ont été comparées :
 - Version avec **contraintes terminales fortes**, imposées via des multiplicateurs de Lagrange \((\mu_1, \mu_2)\).
 - Plus efficace, mais nécessite un **réglage manuel** des multiplicateurs, ce qui peut déstabiliser l’optimisation.
 
-### 3. `pendule_gradient_contrainte_quadratique.py` ✅ **(version retenue)**
+### 3. `pendule_gradient_contrainte_quadratique.py` **(version retenue)**
 - On pénalise directement \( \theta(T)^2 \) et \( \dot{\theta}(T)^2 \) dans la fonction coût :  
   \[
   J(h) = \int_0^1 h(t)^2 \,dt + \lambda_1 \cdot \theta(T)^2 + \lambda_2 \cdot \dot{\theta}(T)^2
