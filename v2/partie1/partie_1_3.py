@@ -41,7 +41,7 @@ for i in range(N - 1):
 
 # --- Affichage amélioré ---
 plt.style.use('seaborn-v0_8-darkgrid')
-fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+fig, axs = plt.subplots(2, 1, figsize=(10, 5), sharex=True)
 
 axs[0].plot(t, np.degrees(theta), color='teal', label="θ(t) [°]")
 axs[0].set_ylabel("Angle θ(t) [°]")

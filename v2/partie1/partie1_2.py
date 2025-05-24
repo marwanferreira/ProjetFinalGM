@@ -47,7 +47,7 @@ for i in range(N - 1):
 
 # --- Affichage graphique ---
 plt.style.use('seaborn-v0_8-darkgrid')
-fig, ax = plt.subplots(figsize=(12, 6))
+fig, ax = plt.subplots(figsize=(10, 5))
 ax.plot(t, np.degrees(theta), label="θ(t) [°]", color='darkblue', linestyle='-')
 ax.plot(t, omega, label="ω(t) [rad/s]", color='crimson', linestyle='--')
 ax.set_title("Pendule simple avec force sin(2θ) (Euler explicite)")

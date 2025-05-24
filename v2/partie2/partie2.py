@@ -59,7 +59,7 @@ for _ in range(n_iterations):
 
 # --- Affichage graphique (même logique que Partie 1) ---
 plt.style.use('seaborn-v0_8-darkgrid')
-fig, axes = plt.subplots(3, 1, figsize=(10, 10), sharex=True)
+fig, axes = plt.subplots(3, 1, figsize=(10, 7), sharex=True)
 
 # Angle θ(t)
 axes[0].plot(t_grid, np.degrees(theta), linestyle='--', color='navy')

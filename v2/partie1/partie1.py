@@ -38,7 +38,7 @@ for i in range(N - 1):
 
 # --- Affichage graphique (esthétique académique) ---
 plt.style.use('seaborn-v0_8-darkgrid')
-fig, axes = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
+fig, axes = plt.subplots(2, 1, figsize=(10, 7), sharex=True)
 
 # Courbe de l'angle θ(t)
 axes[0].plot(t_grid, np.degrees(theta), linestyle='--', color='darkblue')

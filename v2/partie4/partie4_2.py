@@ -54,7 +54,7 @@ theta_opt, omega_opt = simulate_pendulum_friction(h_opt)
 
 # --- Affichage des résultats ---
 plt.style.use('seaborn-v0_8-darkgrid')
-fig, axes = plt.subplots(3, 1, figsize=(10, 10), sharex=True)
+fig, axes = plt.subplots(3, 1, figsize=(10, 7), sharex=True)
 
 axes[0].plot(t_grid, np.degrees(theta_opt), linestyle='--', color='navy')
 axes[0].set_ylabel("Angle θ(t) [°]")
