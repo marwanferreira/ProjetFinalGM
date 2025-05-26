@@ -33,9 +33,21 @@ où $h(t)$ représente une commande externe agissant sur le pendule. L’objecti
 
 ---
 
-## Membres du groupe
+## Visualisation des résultats
 
-- **Samuel Bourhis**
-- **Marwan Ferreira da Silva**
-- **Yvann Landuré**
-- **Julien Ruiz**
+Le dépôt contient plusieurs captures d’écran des simulations réalisées pour les différents cas étudiés (sans contrôle, avec frottements, avec ressort, et avec commande optimale $h(t)$).
+
+Chaque figure représente l’évolution de l’angle $\theta(t)$ et de la vitesse angulaire $\omega(t)$ (ou la position et vitesse dans le cas du ressort), sur l’intervalle temporel étudié. Les styles de courbes suivent les conventions classiques en recherche.
+
+### 🔎 Légende des types de lignes
+
+| Type de ligne     | Code Python | Signification typique en recherche                         |
+|-------------------|-------------|-------------------------------------------------------------|
+| Ligne pleine       | `'-'`       | Référence, solution exacte, modèle principal                |
+| Ligne pointillée   | `'--'`      | Approximation, solution numérique, simulation théorique     |
+| Tiret-point        | `'-. '`     | Variante, solution corrigée, stratégie de contrôle          |
+| Pointillée fine    | `':'`       | Seuil, perturbation, bruit, variation rapide                |
+
+> Cette codification permet une lecture claire, même en noir et blanc, et facilite la comparaison entre différentes simulations.
+
+---
