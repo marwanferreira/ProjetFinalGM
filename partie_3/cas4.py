@@ -53,7 +53,7 @@ t = np.linspace(0, T, N + 1)
 t_h = t[:-1]
 
 plt.style.use('seaborn-v0_8-darkgrid')
-plt.figure(figsize=(12, 6))
+plt.figure(figsize=(10, 5))
 
 plt.plot(t, theta, linestyle='--', color='darkblue', label="Angle θ(t) [rad]")
 plt.plot(t, omega, linestyle='-.', color='darkred', label="Vitesse ω(t) [rad/s]")
