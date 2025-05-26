@@ -1,57 +1,101 @@
+##code partie 3
+
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Constantes
+# Paramètres
+N = 500
+T = 1
+dt = T / N
 g = 9.81
 l = 1.0
-T = 1.0
-N = 100
-dt = T / N
+eta = 0.1
+max_iter = 100
 
 # Conditions initiales
-theta0 = 1.0
-omega0 = 0.0
+theta0 = -0.5
+omega0 = 0.2
 
-# Initialisation
-theta = np.zeros(N+1)
-omega = np.zeros(N+1)
-lambda_theta = np.zeros(N+1)
-lambda_omega = np.zeros(N+1)
-h = np.zeros(N)
+def gradient_descent_quadratic(theta0, omega0):
+    h = np.zeros(N)
+    cost_history = []
 
-# Conditions initiales
-theta[0] = theta0
-omega[0] = omega0
+    def simulate(h):
+        theta = np.zeros(N + 1)
+        omega = np.zeros(N + 1)
+        theta[0] = theta0
+        omega[0] = omega0
+        for i in range(N):
+            theta[i + 1] = theta[i] + dt * omega[i]
+            omega[i + 1] = omega[i] + dt * (- g / l * theta[i] + h[i])
+        return theta, omega
 
-# Nombre d'itérations
-num_iterations = 50
+    def project(h):
+        theta, omega = simulate(h)
+        err_theta = theta[-1]
+        err_omega = omega[-1]
+        correction = np.linspace(1, 0, N)
+        h -= eta * (err_theta + err_omega) * correction
+        return h
 
-for iteration in range(num_iterations):
-    # 1. Forward pass : simulation de theta et omega
-    for k in range(N):
-        theta[k+1] = theta[k] + dt * omega[k]
-        omega[k+1] = omega[k] + dt * (- (g / l) * theta[k] + h[k])  # linéarisé
+    for _ in range(max_iter):
+        grad = 2 * h * dt
+        h -= eta * grad
+        h = project(h)
+        cost = np.sum(h**2) * dt
+        cost_history.append(cost)
 
-    # 2. Conditions finales des multiplicateurs
-    lambda_theta[N] = 0.0
-    lambda_omega[N] = 0.0
+    theta_final, omega_final = simulate(h)
+    return h, theta_final, omega_final, cost_history
 
-    # 3. Backward pass : calcul des multiplicateurs de Lagrange
-    for k in reversed(range(N)):
-        lambda_theta[k] = lambda_theta[k+1] + dt * lambda_omega[k+1] * (g / l)
-        lambda_omega[k] = lambda_omega[k+1] + dt * (lambda_theta[k+1] - omega[k])
+# Exécution
+h_opt, theta, omega, cost_history = gradient_descent_quadratic(theta0, omega0)
 
-        # 4. Mise à jour du contrôle
-        h[k] = 0.5 * lambda_omega[k]
+# Vecteurs de temps
+t_vals = np.linspace(0, T, N + 1)
+t_vals_h = np.linspace(0, T, N)
 
-# Tracé
-t = np.linspace(0, T, N+1)
-plt.figure(figsize=(12, 6))
-plt.plot(t, theta, label=r'$\theta(t)$')
-plt.plot(t, omega, label=r'$\omega(t)$')
-plt.plot(t[:-1], h, label=r'$h(t)$')
+# Tracé des courbes
+plt.figure(figsize=(16, 8))
+
+# θ(t)
+plt.subplot(2, 2, 1)
+plt.plot(t_vals, theta, label="θ(t)")
+plt.axhline(0, color='gray', linestyle='--')
+plt.title("Angle θ(t)")
 plt.xlabel("Temps (s)")
-plt.title("Pendule - Méthode du gradient à pas fixe")
+plt.ylabel("θ (radian)")
+plt.grid()
 plt.legend()
-plt.grid(True)
+
+# ω(t)
+plt.subplot(2, 2, 2)
+plt.plot(t_vals, omega, label="ω(t)", color="orange")
+plt.axhline(0, color='gray', linestyle='--')
+plt.title("Vitesse angulaire ω(t)")
+plt.xlabel("Temps (s)")
+plt.ylabel("ω (rad/s)")
+plt.grid()
+plt.legend()
+
+# h(t)
+plt.subplot(2, 2, 3)
+plt.plot(t_vals_h, h_opt, label="h(t)", color="green")
+plt.axhline(0, color='gray', linestyle='--')
+plt.title("Commande optimale h(t)")
+plt.xlabel("Temps (s)")
+plt.ylabel("h")
+plt.grid()
+plt.legend()
+
+# Coût J(h)
+plt.subplot(2, 2, 4)
+plt.plot(range(len(cost_history)), cost_history, label="J(h)", color="red")
+plt.title("Évolution du coût J(h)")
+plt.xlabel("Itération")
+plt.ylabel("J(h)")
+plt.grid()
+plt.legend()
+
+plt.tight_layout()
 plt.show()
