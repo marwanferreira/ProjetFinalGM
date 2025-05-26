@@ -39,7 +39,7 @@ Le dépôt contient plusieurs captures d’écran des simulations réalisées po
 
 Chaque figure représente l’évolution de l’angle $\theta(t)$ et de la vitesse angulaire $\omega(t)$ (ou la position et vitesse dans le cas du ressort), sur l’intervalle temporel étudié. Les styles de courbes suivent les conventions classiques en recherche.
 
-### 🔎 Légende des types de lignes
+### Légende des types de lignes
 
 | Type de ligne     | Code Python | Signification typique en recherche                         |
 |-------------------|-------------|-------------------------------------------------------------|
